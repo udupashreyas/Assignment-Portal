@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+{% autoescape true %}
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Assignment Portal</title>
+    <link href="stylesheets/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/uniform.css">
+    <script src="stylesheets/jquery-2.1.1.min.js"></script>
+    <script src="stylesheets/bootstrap.js"></script>
+  </head>
+  <body>
+    {% if user %}
+    <div class="container">
+      <div class="col-md-3"></div>
+      <div class="col-md-6" style="margin-top:25%; text-align: center;">
+      <p><a href="{{ url|safe }}">{{ url_linktext }}</a></p>
+      <p><b>{{course}}</b></p>
+      {% for assignment in assignments %}
+        <a href="/view_assignment/{{assignment.answer_key}}">{{assignment.name}}</a><br>
+        <p>Date of submission = {{assignment.date}}</p>
+        {% if assignment.marks != -1 %}
+          <p>Marks = {{assignment.marks}}</p>
+        {% else %}
+          <p>Marks = Not evaluated</p>
+        {% endif %}
+        {% if assignment.comments != "" %}
+          <p>Teacher's comments = {{assignment.comments}}</p>
+        {% else %}
+          <p>Teacher's comments = Not evaluated</p>
+        {% endif %}
+      {% endfor %}
+      </div>
+      <div class="col-md-3"></div>
+    </div>
+    {% endif %}
+  </body>
+</html>
+{% endautoescape %}

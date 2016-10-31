@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+{% autoescape true %}
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Assignment Portal</title>
+    <link href="stylesheets/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/uniform.css">
+    <script src="stylesheets/jquery-2.1.1.min.js"></script>
+    <script src="stylesheets/bootstrap.js"></script>
+  </head>
+  <body>
+    {% if user %}
+    <div class="container">
+      <div class="col-md-3"></div>
+      <div class="col-md-6" style="margin-top: 25%; margin-left:15%">
+      <p><a href="{{ url|safe }}">{{ url_linktext }}</a></p>
+      <form action="{{upload_url}}" method="POST" enctype="multipart/form-data">
+        Name : <input type="text" name="name"><br><br>
+        Deadline : <input type="text" name="deadline"><br><br>
+        Max Marks : <input type="text" name="maxmarks"><br><br>
+        Upload File: <input type="file" name="file"><br>
+        <input type="submit" name="submit" value="Submit">
+      </form>
+      </div>
+      <div class="col-md-3"></div>
+    </div>
+    {% endif %}
+  </body>
+</html>
+{% endautoescape %}

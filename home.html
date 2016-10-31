@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+{% autoescape true %}
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Assignment Portal</title>
+    <link href="stylesheets/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/uniform.css">
+    <script src="stylesheets/jquery-2.1.1.min.js"></script>
+    <script src="stylesheets/bootstrap.js"></script>
+  </head>
+  <body>
+    {% if user %}
+    <div class="container">
+      <div class="col-md-3"></div>
+      <div class="col-md-6" style="text-align:center; margin-top:25%;">
+        <p>Welcome, <b>{{user.nickname()}}</b>!</p>
+        <p><b>{{user_role}}</b></p>
+        <p><a href="{{ url|safe }}">{{ url_linktext }}</a></p>
+        {% if user_role == "Teacher" %}
+          <p><a href="/teachercourse?course=CloudComputing">Cloud Computing</a></p>
+          <p><a href="/teachercourse?course=AI">Artificial Intelligence</a></p>
+          <p><a href="/teachercourse?course=Bioinformatics">Bioinformatics</a></p>
+          <p><a href="/teachercourse?course=Compilers">Compilers</a></p>
+        {% elif user_role == "Student" %}
+          <p><a href="/studentcourse?course=CloudComputing">Cloud Computing</a></p>
+          <p><a href="/studentcourse?course=AI">Artificial Intelligence</a></p>
+          <p><a href="/studentcourse?course=Bioinformatics">Bioinformatics</a></p>
+          <p><a href="/studentcourse?course=Compilers">Compilers</a></p>
+      </div>
+      <div class="col-md-3"></div>
+    </div>
+      {% endif %}
+    {% endif %}
+  </body>
+</html>
+{% endautoescape %}

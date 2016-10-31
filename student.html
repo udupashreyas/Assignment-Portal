@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+{% autoescape true %}
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Assignment Portal</title>
+    <link href="stylesheets/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/uniform.css">
+    <script src="stylesheets/jquery-2.1.1.min.js"></script>
+    <script src="stylesheets/bootstrap.js"></script>
+  </head>
+  <body>
+    {% if user %}
+    <div class="container">
+      <div class="col-md-3"></div>
+      <div class="col-md-6" style="text-align: center; margin-top: 25%;">
+      <p><a href="{{ url|safe }}">{{ url_linktext }}</a></p>
+      {% if course.get() %}
+        <p><b>{{course.fetch(1)[0].name}}</b></p>
+        {% for assignment in assignments %}
+          <a href="/view_assignment/{{assignment.question_key}}">{{assignment.name}}</a><br>
+          <p>Max marks = {{assignment.max_marks}}</p>
+          <p>Deadline = {{assignment.deadline}}</p>
+        {% endfor %}
+        <a href="/submitassignment?course={{course.fetch(1)[0].name}}">Submit Assignment</a>
+        <a href="/myassignments?course={{course.fetch(1)[0].name}}">My Assignments</a>
+      {% else %}
+        <p>This course has not been offered yet</p>
+      {% endif %}
+      </div>
+      <div class="col-md-3"></div>
+    </div>
+    {% else %}
+    {% endif %}
+  </body>
+</html>
+{% endautoescape %}
